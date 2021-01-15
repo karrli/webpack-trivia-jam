@@ -1,4 +1,5 @@
 const TRIVIA_CONTAINER = document.getElementById("questions-container");
+const NEXT_QUESTION= document.getElementById("submitButton");
 
 class Trivia {
     constructor(questions) {
@@ -6,17 +7,18 @@ class Trivia {
         console.log(this.questions, "testing")
         //    this.questions.incorrect_answers = incorrectAnswers
         //    this.questions.correct_answers = correctAnswers
+        this.index = 0
     }
 
-    getAnswers() {
-        for (let i = 0; i < this.questions.length; i++) {
-            let answers = [...this.questions[i].incorrect_answers, this.questions[i].correct_answer]
-            // answers.push(this.questions[i].correct_answer)
+    // getAnswers() {
+    //     for (let i = 0; i < this.questions.length; i++) {
+    //         let answers = [...this.questions[i].incorrect_answers, this.questions[i].correct_answer]
+    //         // answers.push(this.questions[i].correct_answer)
 
-            return answers, console.log(answers, "answers array test")
+    //         return answers, console.log(answers, "answers array test")
 
-        }
-    }
+    //     }
+    // }
 
     buildTrivia() {
 
@@ -34,9 +36,9 @@ class Trivia {
             console.log(this.questions[i].question)
             answersContainer.classList.add("list-group", "mt-3");
             buttonsContainer.classList.add("row", "d-flex", "justify-content-center");
-            submitButton.classList.add("btn", "btn-primary", "mr-3");
+            submitButton.classList.add("btn", "btn-primary", "submitButton", "mr-3");
             submitButton.innerHTML = "Submit";
-            nextButton.classList.add("btn", "btn-success");
+            nextButton.classList.add("btn", "btn-success", "nextButton");
             nextButton.innerHTML = "Next";
             // answerList.classList.add("list-group-item", "text-center")
 
@@ -67,8 +69,13 @@ class Trivia {
         }
     }
 
+    //tried adding Next Button
     Next() {
-
+        TRIVIA_CONTAINER.innerHTML = '';
+        NEXT_QUESTION.addEventListener("click", function () {
+        this.buildTrivia(this.questions[i++].question)
+        console.log(this.questions[i++].question, "testing next")
+    })
     }
 
 }
