@@ -38,9 +38,11 @@ callApiButton.addEventListener("click", function () {
         // handle success
         console.log(response.status)
         console.log(response.data)
+        // let final_data = response.data.results
+        // console.log(final_data.shift(), "results")
 
         const trivia = new Trivia(response.data.results)
-        trivia.buildTrivia();
+        trivia.buildTrivia(response.data.results[0]);
         // trivia.renderQuestions();
       })
       .catch(function (error) {
