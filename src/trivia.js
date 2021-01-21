@@ -1,3 +1,5 @@
+import { indexOf } from "lodash";
+
 const TRIVIA_CONTAINER = document.getElementById("questions-container");
 
 
@@ -6,43 +8,33 @@ class Trivia {
     constructor(questions) {
         this.questions = questions;
         console.log(this.questions, "testing")
-        //    this.questions.incorrect_answers = incorrectAnswers
-        //    this.questions.correct_answers = correctAnswers
         this.currentQuestionIndex = 0
     }
 
-    // getAnswers() {
-    //     for (let i = 0; i < this.questions.length; i++) {
-    //         let answers = [...this.questions[i].incorrect_answers, this.questions[i].correct_answer]
-    //         // answers.push(this.questions[i].correct_answer)
 
-    //         return answers, console.log(answers, "answers array test")
-
-    //     }
-    // }
 
     buildTrivia(questionObject) {
 
-        console.log(questionObject.question, "hola");
-        // for (let i = 0; i < this.questions.length; i++) {
+        console.log(questionObject.question, "receiving the question Object");
+ 
             const questionContainer = document.createElement("div");
             const answersContainer = document.createElement("ul");
             const buttonsContainer = document.createElement("div");
             const submitButton = document.createElement("button");
             const nextButton = document.createElement("button");
-            // const answerList = document.createElement("li");
+
 
             questionContainer.classList.add("d-flex", "justify-content-center");
-            questionContainer.innerHTML = questionObject.question
-            console.log(questionObject.question)
+            questionContainer.innerHTML = this.questions[this.currentQuestionIndex].question
             answersContainer.classList.add("list-group", "mt-3");
+            answersContainer.setAttribute("id", "answersContainer");
             buttonsContainer.classList.add("row", "d-flex", "justify-content-center");
             submitButton.classList.add("btn", "btn-primary", "submitButton", "mr-3");
             submitButton.innerHTML = "Submit";
             nextButton.classList.add("btn", "btn-success", "nextButton");
             nextButton.setAttribute("id", "nextButton");
             nextButton.innerHTML = "Next";
-            nextButton.addEventListener("click", () => {
+            nextButton.addEventListener("click", () => {  //Important! Arrow function: the binding of 'this' will default to the parent scope
                 TRIVIA_CONTAINER.innerHTML = '';
                 console.log(this.currentQuestionIndex)
                 this.currentQuestionIndex++   
@@ -50,49 +42,60 @@ class Trivia {
                 this.buildTrivia(this.questions[this.currentQuestionIndex].question)
                 console.log(this.questions[this.currentQuestionIndex].question, "testing next")
             })
-            // answerList.classList.add("list-group-item", "text-center")
+  
 
-            // answerList.innerHTML = this.getAnswers()
-
-            let answers = [...questionObject.incorrect_answers, questionObject.correct_answer]
-            console.log(questionObject.incorrect_answers, "wrong", questionObject.correct_answer, "right")
+            let answers = [...this.questions[this.currentQuestionIndex].incorrect_answers, this.questions[this.currentQuestionIndex].correct_answer]
+            console.log(...this.questions[this.currentQuestionIndex].incorrect_answers, "wrong", this.questions[this.currentQuestionIndex].correct_answer, "right")
             let shuffledAnswers = _.shuffle(answers)
-            // answers.push(this.questions[i].correct_answer)
-            // return answers.map((answer) =>{answerList.innerHTML = answer, console.log(answerList.innerHTML = answer, "answers array")}) 
+            console.log(shuffledAnswers, "shuffled")
+            
+           
             let answerList = []
             for (let a in shuffledAnswers) {
                 answerList = document.createElement('li');
                 answerList.id = shuffledAnswers[a];
                 answerList.classList.add("list-group-item", "text-center");
                 answerList.innerHTML = shuffledAnswers[a];
-                // document.body.appendChild(answerList);
+                answerList.addEventListener("click", (index) => {
+                    this.checkIndex(index)
+                })
+               
+                // var indexOfSelectedAnswer = document.getElementById("answersContainer");
+                // (function(index) {
+                //     indexOfSelectedAnswer.children[a].onclick = function() {
+                //         index
+                //         console.log(index)
+                //     }
+                // })
+                
 
                 answersContainer.append(answerList);
                 TRIVIA_CONTAINER.append(questionContainer);
                 TRIVIA_CONTAINER.append(answersContainer);
             }
+
+
             buttonsContainer.append(submitButton);
             buttonsContainer.append(nextButton);
             TRIVIA_CONTAINER.append(buttonsContainer);
             answersContainer.append(answerList); //if disabled all questions are shown 
-            // TRIVIA_CONTAINER.append(questionContainer);
-            // TRIVIA_CONTAINER.append(answersContainer);
-        // }
+          
+        
     }
 
-    //tried adding Next Button
-    // Next() {
-    //     console.log("click")
-    //     TRIVIA_CONTAINER.innerHTML = '';
-    //     const NEXT_QUESTION= document.getElementById("nextButton");
+    checkIndex(index) {
+        this.selectedIndex = indexOf(index.target)
+    console.log(index)
 
-    //     console.log(NEXT_QUESTION)
-    //     NEXT_QUESTION.addEventListener("click", function () {
-    //     this.currentQuestionIndex++   
-    //     this.buildTrivia(this.questions[this.currentQuestionIndex].question)
-    //     console.log(this.questions[this.currentQuestionIndex].question, "testing next")
-    // })
+    // Array.from(answerList).indexOf(index.target)
+    // console.log(answerList, "lista de respuestas")
+    //    console.log( Array.from(answerList).indexOf(index.target))
+    // function checkIndex(event) {
+    //     Array.from(answerList).indexOf(event.target)
+    //  console.log(answerList, "lista de respuestas")
+    //     console.log( Array.from(answerList).indexOf(event.target))
     // }
+    }
 
 }
 
