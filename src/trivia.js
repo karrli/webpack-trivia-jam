@@ -9,6 +9,7 @@ class Trivia {
         this.questions = questions;
         console.log(this.questions, "testing")
         this.currentQuestionIndex = 0
+        this.selectedIndex = null
     }
 
 
@@ -73,7 +74,15 @@ class Trivia {
                 TRIVIA_CONTAINER.append(questionContainer);
                 TRIVIA_CONTAINER.append(answersContainer);
             }
-
+            console.log(answersContainer)
+               var indexOfSelectedAnswer = document.getElementById("answersContainer");
+               //necesito un for aquí
+                (function(index) {
+                    indexOfSelectedAnswer.children[a].onclick = function() {
+                        index
+                        console.log(index)
+                    }
+                })
 
             buttonsContainer.append(submitButton);
             buttonsContainer.append(nextButton);
