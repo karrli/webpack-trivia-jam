@@ -1,8 +1,4 @@
-import { indexOf } from "lodash";
-
 const TRIVIA_CONTAINER = document.getElementById("questions-container");
-
-
 
 class Trivia {
     constructor(questions) {
@@ -56,18 +52,14 @@ class Trivia {
                 answerList = document.createElement('li');
                 answerList.id = shuffledAnswers[a];
                 answerList.classList.add("list-group-item", "text-center");
-                answerList.innerHTML = shuffledAnswers[a];
-                answerList.addEventListener("click", (index) => {
-                    this.checkIndex(index)
-                })
                
-                // var indexOfSelectedAnswer = document.getElementById("answersContainer");
-                // (function(index) {
-                //     indexOfSelectedAnswer.children[a].onclick = function() {
-                //         index
-                //         console.log(index)
-                //     }
+                answerList.innerHTML = shuffledAnswers[a];
+                
+                // answerList.addEventListener("click", () => {
+                //     this.checkIndex()
                 // })
+               
+            
                 
 
                 answersContainer.append(answerList);
@@ -75,14 +67,24 @@ class Trivia {
                 TRIVIA_CONTAINER.append(answersContainer);
             }
             console.log(answersContainer)
-               var indexOfSelectedAnswer = document.getElementById("answersContainer");
-               //necesito un for aquí
-                (function(index) {
-                    indexOfSelectedAnswer.children[a].onclick = function() {
-                        index
-                        console.log(index)
-                    }
-                })
+            const selectedIndexAnswersContainer = document.getElementById("answersContainer");
+            //necesito un for aquí
+            for (let i = 0, len = selectedIndexAnswersContainer.children.length; i < len; i++) {
+             (function(index) {
+                selectedIndexAnswersContainer.children[i].onclick = function() {
+                     index
+                     console.log(index, "Index of Selected Answer");
+                     console.log(selectedIndexAnswersContainer.children[i], "real of Selected Answer");
+                     document.querySelector(".list-group-item").style.color = "blue"
+                     
+                     
+                     if (this.selectedIndex === index) {  document.querySelector(".list-group-item").style.color = "#ff0000"}
+        console.log(this.selectedIndex, "selected index")
+                 }
+             })(i);
+             
+         }
+      
 
             buttonsContainer.append(submitButton);
             buttonsContainer.append(nextButton);
@@ -91,21 +93,40 @@ class Trivia {
           
         
     }
+    
+    
+    checkIndex() {
+        const indexOfSelectedAnswer = document.getElementById("answersContainer");
+        //necesito un for aquí
+        for (let i = 0, len = indexOfSelectedAnswer.children.length; i < len; i++) {
+         (function(index) {
+             indexOfSelectedAnswer.children[i].onclick = function() {
+                 index
+                 console.log(index, "Index of Selected Answer");
+                 
+                 if (this.selectedIndex === index) {  document.querySelector(".list-group-item").style.color = "#ff0000"}
+    
+             }
+         })(i);
+         
+     }
 
-    checkIndex(index) {
-        this.selectedIndex = indexOf(index.target)
-    console.log(index)
-
-    // Array.from(answerList).indexOf(index.target)
-    // console.log(answerList, "lista de respuestas")
-    //    console.log( Array.from(answerList).indexOf(index.target))
+    
+    //     this.selectedIndex = indexOf(index.target)
+    // console.log(index)
+      
+    //  Array.from(answersContainer).indexOf(event.target)
+    // console.log(answersContainer, "lista de respuestas")
+    //  console.log( Array.from(answersContainer).indexOf(event.target))
     // function checkIndex(event) {
-    //     Array.from(answerList).indexOf(event.target)
-    //  console.log(answerList, "lista de respuestas")
-    //     console.log( Array.from(answerList).indexOf(event.target))
+    // Array.from(answersContainer).indexOf(event.target)
+    // console.log(answersContainer, "lista de respuestas")
+    // console.log( Array.from(answersContainer).indexOf(event.target))
     // }
-    }
+   }  //
 
+
+    
 }
 
 export default Trivia;

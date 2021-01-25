@@ -11,3 +11,12 @@
     background: #EEE;
     cursor: pointer
    }
+.selected {
+    background-color: lightblue;
+  }
+.correct {
+    background-color: lightgreen;
+  }
+.incorrect {
+    background-color: red;
+}
