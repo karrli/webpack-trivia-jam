@@ -5,4 +5,4 @@ Trivia Game using Open Trivia API and webpack
  
  Initialize it with npm install
  
- Then npm run dev-start
+ Then npm run dev-start.
