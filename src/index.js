@@ -3,27 +3,7 @@ import './styles/main.scss';
 import Trivia from './trivia';
 import _ from 'lodash';
 
-
-function getTriviaQuestions() {
-  axios.get('https://opentdb.com/api.php?amount=10')
-    .then(function (response) {
-      // handle success
-      // console.log(response.status) 
-      console.log(response.data, "esta es la data")
-      // console.log(response.data.results.length)
-      console.log(response.data.results)
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-}
-
-getTriviaQuestions();
-
-
 let callApiButton = document.getElementById("submit");
-
 
 callApiButton.addEventListener("click", () => {
   callApiButton.disabled = true;
