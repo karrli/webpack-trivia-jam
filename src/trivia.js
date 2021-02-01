@@ -1,11 +1,13 @@
 const TRIVIA_CONTAINER = document.getElementById("questions-container");
 
+
 class Trivia {
     constructor(questions) {
         this.questions = questions;
         console.log(this.questions, "testing")
         this.currentQuestionIndex = 0
-        this.selectedIndex = null
+        this.selectedValue = null
+        
     }
 
 
@@ -26,8 +28,13 @@ class Trivia {
             answersContainer.classList.add("list-group", "mt-3");
             answersContainer.setAttribute("id", "answersContainer");
             buttonsContainer.classList.add("row", "d-flex", "justify-content-center");
-            submitButton.classList.add("btn", "btn-primary", "submitButton", "mr-3");
+            submitButton.classList.add("btn", "btn-primary", "mr-3");
             submitButton.innerHTML = "Submit";
+            submitButton.id = ("submitButton");
+            submitButton.disabled = true;
+            submitButton.addEventListener("click", () => {  
+                submitButton.disabled = true;
+             })
             nextButton.classList.add("btn", "btn-success", "nextButton");
             nextButton.setAttribute("id", "nextButton");
             nextButton.innerHTML = "Next";
@@ -39,6 +46,9 @@ class Trivia {
                 this.buildTrivia(this.questions[this.currentQuestionIndex].question)
                 console.log(this.questions[this.currentQuestionIndex].question, "testing next")
             })
+            
+            
+            
   
 
             let answers = [...this.questions[this.currentQuestionIndex].incorrect_answers, this.questions[this.currentQuestionIndex].correct_answer]
@@ -55,9 +65,22 @@ class Trivia {
                
                 answerList.innerHTML = shuffledAnswers[a];
                 
-                // answerList.addEventListener("click", () => {
-                //     this.checkIndex()
-                // })
+                answerList.addEventListener("click", (e) => {
+                    const selectedChoice = e.target;
+                    this.selectedValue = shuffledAnswers[a]
+                    submitButton.disabled = false;
+                    if (this.selectedValue === this.questions[this.currentQuestionIndex].correct_answer ) {
+                    selectedChoice.style.backgroundColor = "#abf0d1" }
+                    else {
+                        selectedChoice.style.backgroundColor = "#ce4d4d" 
+                    }
+                    console.log(e.target.value, "aaahh")
+                    
+                    console.log(this.selectedValue, "value")
+               
+                 
+                })
+                
                
             
                 
@@ -67,63 +90,19 @@ class Trivia {
                 TRIVIA_CONTAINER.append(answersContainer);
             }
             console.log(answersContainer)
-            const selectedIndexAnswersContainer = document.getElementById("answersContainer");
-            //necesito un for aquí
-            for (let i = 0, len = selectedIndexAnswersContainer.children.length; i < len; i++) {
-             (function(index) {
-                selectedIndexAnswersContainer.children[i].onclick = function() {
-                     index
-                     console.log(index, "Index of Selected Answer");
-                     console.log(selectedIndexAnswersContainer.children[i], "real of Selected Answer");
-                     document.querySelector(".list-group-item").style.color = "blue"
-                     
-                     
-                     if (this.selectedIndex === index) {  document.querySelector(".list-group-item").style.color = "#ff0000"}
-        console.log(this.selectedIndex, "selected index")
-                 }
-             })(i);
-             
-         }
-      
-
+        
             buttonsContainer.append(submitButton);
             buttonsContainer.append(nextButton);
             TRIVIA_CONTAINER.append(buttonsContainer);
             answersContainer.append(answerList); //if disabled all questions are shown 
-          
+            submitButton.disabled = true;
         
     }
     
     
-    checkIndex() {
-        const indexOfSelectedAnswer = document.getElementById("answersContainer");
-        //necesito un for aquí
-        for (let i = 0, len = indexOfSelectedAnswer.children.length; i < len; i++) {
-         (function(index) {
-             indexOfSelectedAnswer.children[i].onclick = function() {
-                 index
-                 console.log(index, "Index of Selected Answer");
-                 
-                 if (this.selectedIndex === index) {  document.querySelector(".list-group-item").style.color = "#ff0000"}
-    
-             }
-         })(i);
-         
-     }
 
-    
-    //     this.selectedIndex = indexOf(index.target)
-    // console.log(index)
-      
-    //  Array.from(answersContainer).indexOf(event.target)
-    // console.log(answersContainer, "lista de respuestas")
-    //  console.log( Array.from(answersContainer).indexOf(event.target))
-    // function checkIndex(event) {
-    // Array.from(answersContainer).indexOf(event.target)
-    // console.log(answersContainer, "lista de respuestas")
-    // console.log( Array.from(answersContainer).indexOf(event.target))
-    // }
-   }  //
+  
+
 
 
     

@@ -25,7 +25,8 @@ getTriviaQuestions();
 let callApiButton = document.getElementById("submit");
 
 
-callApiButton.addEventListener("click", function () {
+callApiButton.addEventListener("click", () => {
+  callApiButton.disabled = true;
     let category = document.getElementById("trivia_category").value;
     let difficulty = document.getElementById("trivia_difficulty").value;
     let type = document.getElementById("trivia_type").value;
