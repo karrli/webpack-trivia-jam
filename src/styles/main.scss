@@ -1,3 +1,28 @@
+body, html {
+  height: 100%;
+}
+// body  {
+
+//   background-image: url("https://d16kd6gzalkogb.cloudfront.net/artist_images/Carlos-Merida-Untitled-image-courtesy-of-Janefargo.jpg");
+  
+// }
+.bg-image {
+  /* The image used */
+  background-image: url("https://d16kd6gzalkogb.cloudfront.net/artist_images/Carlos-Merida-Untitled-image-courtesy-of-Janefargo.jpg");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+
+  height: 30%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .dropright {
     padding-left: 50px;
 }
@@ -11,6 +36,32 @@
     background: #EEE;
     cursor: pointer
    }
+.tabs {
+  margin-top: 50px;
+}
+
+#score-label {
+  padding-right: 10px;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(29, 47, 238);
+ 
+}
+#score {
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: rgb(189, 9, 99);
+}
+h2{
+  color: rgb(139, 77, 1);
+}
+#submit {
+  border-radius: 15px;
+}
+label {
+  color: rgb(139, 77, 1);
+}
 .selected {
     background-color: lightblue;
   }

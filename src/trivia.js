@@ -1,10 +1,13 @@
 const TRIVIA_CONTAINER = document.getElementById("questions-container");
+const SCORETEXT = document.getElementById("score");
+const CORRECT_POINTS = 10
 class Trivia {
     constructor(questions) {
         this.questions = questions;
         console.log(this.questions, "testing")
         this.currentQuestionIndex = 0
-        this.selectedValue = null       
+        this.selectedValue = null 
+        this.score = 0      
     }
 
     buildTrivia(questionObject) {
@@ -56,7 +59,11 @@ class Trivia {
                     this.selectedValue = shuffledAnswers[a]
                     submitButton.disabled = false;
                     this.selectedValue === this.questions[this.currentQuestionIndex].correct_answer ? 
-                    selectedChoice.style.backgroundColor = "#abf0d1" : selectedChoice.style.backgroundColor = "#ce4d4d"                                                   
+                    selectedChoice.style.backgroundColor = "#abf0d1": selectedChoice.style.backgroundColor = "#ce4d4d"
+                    if (this.selectedValue === this.questions[this.currentQuestionIndex].correct_answer) {
+                        this.updateScore(CORRECT_POINTS);
+                    }
+
                 })
 
                 answersContainer.append(answerList);
@@ -70,6 +77,10 @@ class Trivia {
             answersContainer.append(answerList); //if disabled all questions are shown 
             submitButton.disabled = true;        
     }   
+  
+    updateScore(num) {
+        this.score += num;
+        SCORETEXT.innerText = this.score;
+    };
 }
-
 export default Trivia;

@@ -10,21 +10,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>Hello, world!</title>
+  <title>Trivia Jam</title>
 </head>
 
 <body>
+  <div class="bg-image"></div>
   <div>
-    <b-nav pills tabs class="d-flex justify-content-center">
-      <b-nav-item disabled><b>Trivia Jam</b></b-nav-item>
-      <b-nav-item disabled>Counter: numCorrect/numTotal </b-nav-item>
+    <b-nav pills tabs class="d-flex justify-content-center tabs">
+      <b-nav-item disabled id ="score-label"><b>SCORE</b></b-nav-item>
+      <b-nav-item disabled id="score">0</b-nav-item>
     </b-nav>
   </div>
-  <h1 class="d-flex justify-content-center mt-5">Welcome, creature. Please select your game</h1>
+  <h2 class="d-flex justify-content-center mt-5">Welcome, creature. Select your game! </h2>
    <div class="row justify-content-center mt-5">
   <div col-lg-6 col-md-4 col-sm-4 class="form-group">
   <label for="trivia_category">Category</label><br>
-  <select  class="form-control form-control-lg" id="trivia_category" name="trivia_category">
+  <select  class="form-control " id="trivia_category" name="trivia_category">
     <option value="9">General Knowledge</option>
     <option value="10">Entertainment: Books</option>
     <option value="11">Entertainment: Film</option>
@@ -52,21 +53,21 @@
   </select>
   <br>
   <label for="trivia_difficulty">Difficulty</label><br>
-  <select  class="form-control form-control-lg" id="trivia_difficulty" name="trivia_difficulty">
+  <select  class="form-control" id="trivia_difficulty" name="trivia_difficulty">
     <option value="easy">Easy</option>
     <option value="medium">Medium</option>
     <option value="hard">Hard</option>
   </select>
   <br>
   <label for="trivia_type">Type</label><br>
-  <select  class="form-control form-control-lg" id="trivia_type" name="trivia_type">
+  <select  class="form-control" id="trivia_type" name="trivia_type">
     <option value="multiple">Multiple Choice</option>
     <option value="boolean">True / False</option>
   </select>
   <br>
   <div class="row justify-content-center">
     <div col-md-2  class="div">
-    <button name="order" id="submit">
+    <button name="order" id="submit" class="btn btn-secondary">
       Submit
     </button>
   </div>
@@ -76,6 +77,7 @@
 </div>
 
 <main id="questions-container" class="container my-5 col-sm-3 bg-warning mb-5 pb-5">
+  
   <!-- <div class="d-flex justify-content-center">Question</div>
   <ul class="list-group mt-3 ">
     <li class="list-group-item text-center">Answer option </li>
